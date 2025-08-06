@@ -1,0 +1,4 @@
+@EndUserText.label: 'Definición del Servicio'
+define service Zsd_web_products {
+  expose Zce_web_alb_product as Products;
+}

@@ -7,13 +7,16 @@ class zcl_comsume_ws_prod definition
 
   public section.
     interfaces if_rap_query_provider.
+    interfaces if_oo_adt_classrun .
 
     constants: mc_base_url              type string value 'https://sapes5.sapdevcenter.com/',
                mc_relative_service_root type string value '/sap/opu/odata/sap/zpdcds_srv/'.
 
     types t_bussines_data type zwsc_odata_prod=>tyt_sepmra_i_product_etype.
     types t_products_range type range of zwsc_odata_prod=>tys_sepmra_i_product_etype.
-    interfaces if_oo_adt_classrun .
+    types t_business_data_ext type table of Zce_web_alb_product.
+
+
   protected section.
   private section.
     methods get_product
@@ -152,6 +155,51 @@ class zcl_comsume_ws_prod implementation.
   endmethod.
 
   method if_rap_query_provider~select.
+    data: business_data     type t_bussines_data,
+          business_data_ext type t_business_data_ext.
+    data(top) = io_request->get_paging(  )->get_page_size(  ).
+    data(skip) = io_request->get_paging(  )->get_offset(  ).
+
+    data(request_fields) = io_request->get_requested_elements(  ).
+    data(sort_orders)    = io_request->get_sort_elements(  ).
+
+    try.
+        data(filters_condition) = io_request->get_filter(  )->get_as_ranges(  ).
+        me->get_product( exporting it_filter_cod    = filters_condition
+                                   top              = conv i( top )
+                                   skip             = conv i( skip )
+                         importing et_bussines_data = business_data ).
+
+
+    business_data_ext = corresponding #( business_data mapping Product          = product
+                                                               ProductType      = product_type
+                                                               ProductCategory  = product_category
+                                                               Price            = price
+                                                               Currency         = currency
+                                                               Supplier         = supplier  ).
+
+
+
+     loop at business_data_ext assigning field-symbol(<ws_data>).
+
+     <ws_data>-productcategory = | <ws_data>-productcategory - { <ws_data>-supplier } |.
+
+     endloop.
+
+
+    io_response->set_total_number_of_records( lines( business_data_ext ) ).
+    io_response->set_data( business_data_ext ).
+
+
+
+
+
+
+      catch cx_root into data(lx_exeption) .
+        data(exeption_message) =  cl_message_helper=>get_latest_t100_exception(  lx_exeption )->if_message~get_longtext(  ) .
+
+    endtry.
+
 
   endmethod.
 
