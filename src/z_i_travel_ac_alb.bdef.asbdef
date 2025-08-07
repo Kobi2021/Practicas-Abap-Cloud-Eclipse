@@ -1,0 +1,42 @@
+managed implementation in class zbp_i_travel_ac_alb unique;
+strict ( 2 );
+with draft;
+
+define behavior for z_i_travel_ac_alb alias Travel
+persistent table zlgl_travel_alb
+draft table zlgl_travel_d
+etag master LocalLastChangedBy
+lock master total etag LastChangedAt
+authorization master ( instance )
+//etag master <field_name>
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly, numbering : managed ) TravelsUuid;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+  mapping for zlgl_travel_alb corresponding
+    {
+      TravelsUuid        = travels_uuid;
+      TravelId           = travel_id;
+      AgencyId           = agency_id;
+      CustomerId         = customer_id;
+      BeginDate          = begin_date;
+      EndDate            = end_date;
+      BookingFee         = booking_fee;
+      TotalPrice         = total_price;
+      CurrencyCode       = currency_code;
+      Description        = description;
+      OverallStatus      = overall_status;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}

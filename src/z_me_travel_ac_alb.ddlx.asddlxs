@@ -1,0 +1,103 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Viaje',
+    typeNamePlural: 'Viajes',
+    title: {
+        type: #STANDARD,
+        value: 'TravelID'
+    },
+    description: {
+        type: #STANDARD,
+        value: 'TravelID'
+    }
+}
+annotate entity z_c_travel_ac_alb
+    with 
+{
+  @UI.facet: [{ id: 'Viaje',
+                purpose:#STANDARD,
+                type:#IDENTIFICATION_REFERENCE,
+                label: 'Viaje',
+                position: 10  }]
+    @UI.hidden: true
+    TravelsUuid;
+    
+    @UI: {  lineItem: [ { position: 10,
+                          importance: #HIGH }],
+            identification: [{ position: 10,
+                               label: 'Travel ID'  }],
+            selectionField: [{ position: 10 }] }
+    TravelId;
+    
+    @UI: {  lineItem: [ { position: 20,
+                          importance: #HIGH }],
+            identification: [{ position: 20 }],
+            selectionField: [{ position: 20 }] }
+    AgencyId;
+    @UI: {  lineItem: [ { position: 30,
+                          importance: #HIGH }],
+            identification: [{ position: 30 }],
+            selectionField: [{ position: 30 }] }    
+    CustomerId;
+    
+    @UI: {  lineItem: [ { position: 40,
+                          importance: #HIGH }],
+            identification: [{ position: 40 }],
+            selectionField: [{ position: 40 }] }    
+    BeginDate;
+
+    @UI: {  lineItem: [ { position: 50,
+                          importance: #HIGH }],
+            identification: [{ position: 50 }]}    
+    EndDate;
+
+    @UI: {  lineItem: [ { position: 60,
+                          importance: #HIGH }],
+            identification: [{ position: 60 }] }    
+    BookingFee;
+    
+    @UI: {  lineItem: [ { position: 70,
+                          importance: #HIGH }],
+            identification: [{ position: 70 }] }    
+    TotalPrice;
+    
+    @UI: {  lineItem: [ { position: 80,
+                          importance: #HIGH }],
+            identification: [{ position: 80 }] }    
+    CurrencyCode;
+    
+////    @UI: {  lineItem: [ { position: 90,
+////                          importance: #HIGH }],
+////            identification: [{ position: 90 }] }    
+////    Description;
+////    
+////    @UI: {  lineItem: [ { position: 100,
+////                          importance: #HIGH }],
+////            identification: [{ position: 100 }] }    
+////    OverallStatus;
+////    
+////    @UI: {  lineItem: [ { position: 110,
+////                          importance: #HIGH }],
+////            identification: [{ position: 110 }] }    
+////    LocalCreatedBy;
+////    
+////    @UI: {  lineItem: [ { position: 20,
+////                          importance: #HIGH }] }    
+////    LocalCreatedAt;
+////    
+////    @UI: {  lineItem: [ { position: 130,
+////                          importance: #HIGH }],
+////            identification: [{ position: 130 }] }    
+////    LocalLastChangedBy;
+////    
+////    @UI: {  lineItem: [ { position: 140,
+////                          importance: #HIGH }],
+////            identification: [{ position: 140 }] }    
+////    LocalLastChangedAt;
+////    
+////    @UI: {  lineItem: [ { position: 150,
+////                          importance: #HIGH }],
+////            identification: [{ position: 150 }] }    
+////    LastChangedAt;
+    
+}
