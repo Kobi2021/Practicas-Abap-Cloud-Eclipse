@@ -1,0 +1,34 @@
+{
+  "formatVersion": "2",
+  "header": {
+    "description": "",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "Travel"
+  },
+  "ui5AppDetails": {
+    "appId": "namespacealb.projalb"
+  },
+  "navigation": {
+    "targetMappingId": "UI5R_4999AD8A092A6A469BCC1B41F88F9819AA4F3305_TM",
+    "semanticObject": "Travel",
+    "action": "manage",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "UI5R_4999AD8A092A6A469BCC1B41F88F9819AA4F3305_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "Travel"
+      }
+    }
+  ]
+}
